@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
 
-export const SpentForm = ({setRefresh}) => {
+
+export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
   const [spentForm, setspentForm] = useState({
-    id: Date.now(),
     name: '',
     amount: 0,
-    spentDate: '',
+    spentDate: format(new Date(), 'yyyy-dd-MM'),
   });
+  const [isEditable, setIsEditable] = useState(false);
+
+  useEffect(() => {
+    if (editable) {
+      setspentForm(editable);
+      setIsEditable(true);
+    }
+    setRefresh(false);
+  }, [refresh]);
 
   const handleInputChange = ({ target }) => {
     setspentForm({
@@ -19,13 +29,32 @@ export const SpentForm = ({setRefresh}) => {
     e.preventDefault();
 
     const spents = JSON.parse(localStorage.getItem('spents'));
-    if (!spents) {
-      localStorage.setItem('spents', JSON.stringify([spentForm]));
-    } else {
-      const saveSpense = [...spents, spentForm];
+
+    if (isEditable) {
+      const saveSpense = spents.map((spent) =>
+        spent.id === spentForm.id ? spentForm : spent
+      );
       localStorage.setItem('spents', JSON.stringify(saveSpense));
+      setEditable(null);
+      alert(`${spentForm.name} has been updated`);
+    } else {
+      if (!spents) {
+        localStorage.setItem(
+          'spents',
+          JSON.stringify([{ ...spentForm, id: Date.now() }])
+        );
+      } else {
+        const saveSpense = [...spents, { ...spentForm, id: Date.now() }];
+        localStorage.setItem('spents', JSON.stringify(saveSpense));
+      }
     }
-    setRefresh(true)
+    setspentForm({
+      name: '',
+      amount: 0,
+      spentDate: format(new Date(), 'yyyy-dd-MM'),
+    });
+    setRefresh(true);
+    setIsEditable(false);
   };
 
   return (
@@ -38,6 +67,7 @@ export const SpentForm = ({setRefresh}) => {
         id='nameSpent'
         value={spentForm.name}
         onChange={handleInputChange}
+        required
       />
       <label htmlFor='nameSpent'>Amount:</label>
       <input
@@ -55,9 +85,12 @@ export const SpentForm = ({setRefresh}) => {
         name='spentDate'
         className='form-control'
         value={spentForm.spentDate}
+        
         onChange={handleInputChange}
       />
-      <button className='btn btn-dark w-100 mt-2'>create spent</button>
+      <button className='btn btn-dark w-100 mt-2'>
+        {isEditable ? 'edit spent' : 'create spent'}
+      </button>
     </form>
   );
 };
