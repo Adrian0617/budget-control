@@ -14,7 +14,7 @@ export const Stats = ({ refresh, setRefresh }) => {
       {
         id: 1,
         name: 'Budget Actual',
-        info: getbudgetActual(),
+        info: `$${getbudgetActual()}`,
       },
       {
         id: 2,
@@ -44,7 +44,7 @@ export const Stats = ({ refresh, setRefresh }) => {
   return (
     <div style={{maxWidth: '450px'}} className='d-flex flex-wrap mb-5 '>
       {dataStats.map((stat) => (
-        <div className='card text-center w-50 mt-4' key={stat.id}>
+        <div style={{width: '45%'}} className='card text-center m-2 mt-4' key={stat.id}>
           <div className='card-header'></div>
           <div className='card-body'>
             <h5 className='card-title'>{stat.name.toUpperCase()}</h5>

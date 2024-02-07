@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import Swal from 'sweetalert2';
 
 export const BudgetForm = ({ setRefresh }) => {
   const inputBudget = useRef(null);
@@ -8,6 +9,13 @@ export const BudgetForm = ({ setRefresh }) => {
     if (inputBudget.current.value === '') return;
     localStorage.setItem('budget', budget);
     inputBudget.current.value = '';
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your budget has been created',
+      showConfirmButton: false,
+      timer: 1000,
+    });
     setRefresh(true);
   };
 
