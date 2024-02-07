@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
-
+import { getSpents, getbudget } from '../../helpers/getStasts';
+import Swal from 'sweetalert2';
 
 export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
   const [spentForm, setspentForm] = useState({
@@ -28,7 +29,17 @@ export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const spents = JSON.parse(localStorage.getItem('spents'));
+    const spents = getSpents();
+    const budget = getbudget();
+
+    if (budget < 1) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "you must add a budget",
+      });
+      return;
+    }
 
     if (isEditable) {
       const saveSpense = spents.map((spent) =>
@@ -36,7 +47,13 @@ export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
       );
       localStorage.setItem('spents', JSON.stringify(saveSpense));
       setEditable(null);
-      alert(`${spentForm.name} has been updated`);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your spent has been updated',
+        showConfirmButton: false,
+        timer: 1000,
+      });
     } else {
       if (!spents) {
         localStorage.setItem(
@@ -47,6 +64,13 @@ export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
         const saveSpense = [...spents, { ...spentForm, id: Date.now() }];
         localStorage.setItem('spents', JSON.stringify(saveSpense));
       }
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your spent has been created',
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
     setspentForm({
       name: '',
@@ -86,7 +110,6 @@ export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
         name='spentDate'
         className='form-control'
         value={spentForm.spentDate}
-        
         onChange={handleInputChange}
       />
       <button className='btn btn-dark w-100 mt-2'>

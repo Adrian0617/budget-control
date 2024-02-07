@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillPencilFill, BsXSquareFill } from 'react-icons/bs';
+import { getSpents } from '../../helpers/getStasts';
+import Swal from 'sweetalert2';
 
 export const ListsSpents = ({ setRefresh, refresh, setEditable }) => {
   const [listSpenses, setlistSpenses] = useState([]);
@@ -11,12 +13,32 @@ export const ListsSpents = ({ setRefresh, refresh, setEditable }) => {
   }, [refresh]);
 
   const handleDelete = (id) => {
-    const spentlist = JSON.parse(localStorage.getItem('spents'));
+    const spentlist = getSpents();
     const deleltedSpent = spentlist.filter((item) => item.id !== id);
-    console.log({ deleltedSpent });
     localStorage.setItem('spents', JSON.stringify(deleltedSpent));
     setRefresh(true);
   };
+
+  const openConfrimDelete = (id) =>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDelete(id)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your spent has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+  }
 
   const handleEdit = (spense) => {
     console.log(spense);
@@ -43,7 +65,7 @@ export const ListsSpents = ({ setRefresh, refresh, setEditable }) => {
               <td>{item.amount}</td>
               <td>{item.spentDate}</td>
               <td>
-                <button className='btn' onClick={() => handleDelete(item.id)}>
+                <button className='btn' onClick={() => openConfrimDelete(item.id)}>
                   <BsXSquareFill />
                 </button>
                 <button className='btn' onClick={() => handleEdit(item)}>

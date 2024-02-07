@@ -1,6 +1,6 @@
-const getbudget = () => Number(localStorage.getItem('budget'));
+export const getbudget = () => Number(localStorage.getItem('budget'));
 
-const getSpents = () => JSON.parse(localStorage.getItem('spents')) || [];
+export const getSpents = () => JSON.parse(localStorage.getItem('spents')) || [];
 
 export const getTotalAmountSpents = () => {
   const totalAmountSpents = getSpents().reduce(

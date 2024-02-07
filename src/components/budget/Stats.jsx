@@ -29,7 +29,7 @@ export const Stats = ({ refresh, setRefresh }) => {
       {
         id: 1,
         name: 'percentage of budget used',
-        info: `${percentBudgetSpent()}%`,
+        info: `${percentBudgetSpent() === "NaN" ? 0 : percentBudgetSpent() }%`,
       },
     ];
     return statsData;
