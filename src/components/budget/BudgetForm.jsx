@@ -12,6 +12,8 @@ export const BudgetForm = ({setRefresh}) => {
   };
 
   return (
+    <>
+      <h3>Create your Budget</h3>
     <div className='input-group '>
       {/* <span className='input-group-text'>enter yout budget</span> */}
       <span className='input-group-text'>$</span>
@@ -20,10 +22,11 @@ export const BudgetForm = ({setRefresh}) => {
         className='form-control'
         placeholder='Enter your budget'
         ref={inputBudget}
-      />
+        />
       <button onClick={saveBudget} type='button' className='btn btn-dark'>
         create
       </button>
     </div>
+        </>
   );
 };

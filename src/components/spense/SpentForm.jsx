@@ -59,6 +59,7 @@ export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h3>Create a spent</h3>
       <label htmlFor='nameSpent'>Name:</label>
       <input
         type='text'

@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import { ListsSpents } from './ListsSpents';
 import { SpentForm } from './SpentForm';
 
-export const SpentContainer = () => {
-  const [refresh, setRefresh] = useState(false);
-  const [editable, setEditable] = useState(null);
+export const SpentContainer = ({
+  refresh,
+  editable,
+  setRefresh,
+  setEditable,
+}) => {
   return (
     <div className='d-flex justify-content-center flex-column'>
       <SpentForm

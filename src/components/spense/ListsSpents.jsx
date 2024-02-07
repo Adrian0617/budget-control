@@ -25,7 +25,8 @@ export const ListsSpents = ({ setRefresh, refresh, setEditable }) => {
   };
 
   return (
-    <div>
+    <div className='mt-5'>
+      <h3>List of spents</h3>
       <table className='table'>
         <thead>
           <tr>
