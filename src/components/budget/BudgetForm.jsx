@@ -27,7 +27,7 @@ export const BudgetForm = ({ setRefresh }) => {
         <span className='input-group-text'>$</span>
         <input
           type='number'
-          className='form-control'
+          className='form-control shadow-lg'
           placeholder='Enter your budget'
           ref={inputBudget}
         />

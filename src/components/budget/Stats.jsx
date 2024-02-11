@@ -44,7 +44,7 @@ export const Stats = ({ refresh, setRefresh }) => {
     <div style={{maxWidth: '450px'}} className='d-flex flex-wrap mb-5 '>
       {dataStats.map((stat) => (
         <div style={{width: '45%'}} className='card text-center m-2 mt-4' key={stat.id}>
-          <div className='card-header'></div>
+          <div className='card-header shadow-lg'></div>
           <div className='card-body'>
             <h5 className='card-title'>{stat.name.toUpperCase()}</h5>
             <h3 className='card-text'>{stat.info}</h3>
