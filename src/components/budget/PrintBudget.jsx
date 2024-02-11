@@ -13,7 +13,7 @@ export const PrintBudget = ({ setRefresh, refresh }) => {
     <div className='card text-center mt-3'>
       {/* <div className='card-header'>Budget</div> */}
       <div className='card-body'>
-        <h5 className='card-title'>Your budget </h5>
+        <h5 className='card-title'>YOUR BUDGET </h5>
         <h3 className='card-text'>{budget}</h3>
         {/* <a href='#' className='btn btn-primary'>
           Go somewhere

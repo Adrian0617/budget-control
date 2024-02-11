@@ -13,18 +13,18 @@ export const Stats = ({ refresh, setRefresh }) => {
     const statsData = [
       {
         id: 1,
-        name: 'Budget Actual',
-        info: `$${getbudgetActual()}`,
+        name: 'Budget remaining',
+        info: `$${getbudgetActual().toFixed(2)}`,
       },
       {
         id: 2,
-        name: 'total spents',
+        name: 'Number of spents',
         info: totalSpents(),
       },
       {
         id: 3,
-        name: 'Ttotal amount spent',
-        info: `$${getTotalAmountSpents()}`,
+        name: 'Total amount spent',
+        info: `$${getTotalAmountSpents().toFixed(2)}`,
       },
       {
         id: 1,
@@ -37,7 +37,6 @@ export const Stats = ({ refresh, setRefresh }) => {
 
   useEffect(() => {
     setdataStats(getData());
-    console.log('se ejecuta', getData());
     setRefresh(false);
   }, [refresh]);
 

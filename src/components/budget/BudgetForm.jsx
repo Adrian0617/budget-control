@@ -21,7 +21,7 @@ export const BudgetForm = ({ setRefresh }) => {
 
   return (
     <>
-      <h3>Create your Budget</h3>
+      <h3>Create your budget</h3>
       <div className='input-group '>
         {/* <span className='input-group-text'>enter yout budget</span> */}
         <span className='input-group-text'>$</span>

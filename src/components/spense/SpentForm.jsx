@@ -83,8 +83,8 @@ export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Create a spent</h3>
-      <label htmlFor='nameSpent'>Name:</label>
+      <h3>Create an spent</h3>
+      <label htmlFor='nameSpent'>Name/Description:</label>
       <input
         type='text'
         className='form-control'
@@ -103,7 +103,7 @@ export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
         value={spentForm.amount}
         onChange={handleInputChange}
       />
-      <label htmlFor='spentDate'>Spent Date:</label>
+      <label htmlFor='spentDate'>Expense Date:</label>
       <input
         type='date'
         id='spentDate'
@@ -113,7 +113,7 @@ export const SpentForm = ({ setRefresh, refresh, editable, setEditable }) => {
         onChange={handleInputChange}
       />
       <button className='btn btn-dark w-100 mt-2'>
-        {isEditable ? 'edit spent' : 'create spent'}
+        {isEditable ? 'edit spent' : 'create an expense'}
       </button>
     </form>
   );

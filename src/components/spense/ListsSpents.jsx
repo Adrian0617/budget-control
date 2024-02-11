@@ -41,7 +41,6 @@ export const ListsSpents = ({ setRefresh, refresh, setEditable }) => {
   }
 
   const handleEdit = (spense) => {
-    console.log(spense);
     setEditable(spense);
     setRefresh(true);
   };
